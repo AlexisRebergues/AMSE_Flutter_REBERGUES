@@ -66,28 +66,28 @@ class _Page_ManuState extends State<Page_Manu> {
             const Text(
               "Ajouter un media par scan",
             ),
-            DropdownButton<String>(
-              value: media,
-              icon: const Icon(Icons.arrow_downward),
-              elevation: 16,
-              style: const TextStyle(color: Colors.black),
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-              onChanged: (String? newValue) {
-                setState(() {
-                  media = newValue!;
-                });
-              },
-              items: <String>['Lavoisier', 'Bourseul']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
+            // DropdownButton<String>(
+            //   value: media,
+            //   icon: const Icon(Icons.arrow_downward),
+            //   elevation: 16,
+            //   style: const TextStyle(color: Colors.black),
+            //   underline: Container(
+            //     height: 2,
+            //     color: Colors.black,
+            //   ),
+            //   onChanged: (String? newValue) {
+            //     setState(() {
+            //       media = newValue!;
+            //     });
+            //   },
+            //   items: <String>['Lavoisier']
+            //       .map<DropdownMenuItem<String>>((String value) {
+            //     return DropdownMenuItem<String>(
+            //       value: value,
+            //       child: Text(value),
+            //     );
+            //   }).toList(),
+            // ),
             GestureDetector(
               child: Container(
                 margin: const EdgeInsets.all(30),
@@ -183,7 +183,7 @@ class MediaSection extends StatelessWidget {
                         top: 20,
                         left: 5,
                         child: Text(
-                          listeMedia[index][0],
+                          listeMedia[index].auteur,
                           style: GoogleFonts.nunito(
                             fontSize: 21,
                             fontWeight: FontWeight.w800,
@@ -195,7 +195,7 @@ class MediaSection extends StatelessWidget {
                         top: 60,
                         left: 5,
                         child: Text(
-                          listeMedia[index][1],
+                          listeMedia[index].date,
                           style: GoogleFonts.nunito(
                             fontSize: 14,
                             color: Colors.white,
@@ -216,7 +216,7 @@ class MediaSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        " Auteur : " + listeMedia[index][2],
+                        " Auteur : " + listeMedia[index].description,
                         style: GoogleFonts.nunito(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -226,7 +226,7 @@ class MediaSection extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          ' Langue : ' + listeMedia[index][3].toString(),
+                          ' Langue : ' + listeMedia[index].image,
                           style: GoogleFonts.nunito(
                             fontSize: 14,
                             color: Colors.white,
@@ -245,7 +245,7 @@ class MediaSection extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "Ajouté le :" + listeMedia[index][5].toString(),
+                            "Ajouté le :" + listeMedia[index].langue,
                             style: GoogleFonts.nunito(
                               fontSize: 14,
                               color: Colors.white,
@@ -261,7 +261,7 @@ class MediaSection extends StatelessWidget {
                           size: 14.0,
                         ),
                         Text(
-                          listeMedia[index][4].toString(),
+                          listeMedia[index].nomLivre,
                           style: GoogleFonts.nunito(
                             fontSize: 14,
                             color: Colors.white,

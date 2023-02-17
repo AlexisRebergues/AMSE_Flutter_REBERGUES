@@ -31,6 +31,11 @@ class Media {
     } else {
       this.description = description;
     }
+    if (image == "") {
+      this.image = "Inconnu";
+    } else {
+      this.image = image;
+    }
   }
 
   late String nomLivre;
@@ -44,6 +49,6 @@ class Media {
 }
 
 Media interstellar = Media("Interstellar", "Christopher Nolan", "2014",
-    "English", "2euros", "image.jpg", false);
+    "English", "2euros", "image", false);
 
-List listeMedia = [interstellar];
+List<Media> listeMedia = [interstellar];
