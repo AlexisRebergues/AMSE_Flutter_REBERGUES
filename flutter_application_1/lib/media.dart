@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class Media {
   //"isbn10";"isbn13";"titre";"auteur";"editeur";"date";"langue";"description"
-  Media(String nomLivre, String auteur, String date, String langue,
+  Media(String nomMedia, String auteur, String date, String langue,
       String description, String image, bool liked) {
-    if (nomLivre == "") {
-      this.nomLivre = "Inconnu";
+    if (nomMedia == "") {
+      this.nomMedia = "Inconnu";
     } else {
-      this.nomLivre = nomLivre;
+      this.nomMedia = nomMedia;
     }
     if (auteur == "") {
       this.auteur = "Inconnu";
@@ -38,7 +38,7 @@ class Media {
     }
   }
 
-  late String nomLivre;
+  late String nomMedia;
   late String auteur;
   late String isbn13;
   late String date;
@@ -49,6 +49,6 @@ class Media {
 }
 
 Media interstellar = Media("Interstellar", "Christopher Nolan", "2014",
-    "English", "2euros", "image", false);
+    "English", "un film sur l'espace", 'INTERSTELLAR.jpg', false);
 
 List<Media> listeMedia = [interstellar];
