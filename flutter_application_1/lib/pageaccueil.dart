@@ -173,144 +173,149 @@ class MediaSection extends StatelessWidget {
                 ),
               ],
             ),
-            child: Column(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: 200.0,
-                  margin: EdgeInsets.fromLTRB(0, 0, 700, 100),
-                  width: 150.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    height: 240,
+                    width: 150,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
                       image: AssetImage(listeMedia[index].image),
-                      fit: BoxFit.fill,
-                    ),
-                    shape: BoxShape.rectangle,
-                  ),
-                ),
+                    ))),
                 Container(
-                  margin: EdgeInsets.fromLTRB(200, 0, 0, 0),
-                  height: 160,
-                  child: Stack(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  height: 240,
+                  width: 500,
+                  child: Column(
                     children: [
-                      Positioned(
-                        top: 20,
-                        left: 5,
-                        child: Text(
-                          listeMedia[index].nomMedia,
-                          style: GoogleFonts.nunito(
-                            fontSize: 21,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.black38,
-                          ),
+                      Container(
+                        height: 160,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: 20,
+                              left: 5,
+                              child: Text(
+                                listeMedia[index].nomMedia,
+                                style: GoogleFonts.nunito(
+                                  fontSize: 21,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.black38,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 60,
+                              left: 5,
+                              child: Text(
+                                listeMedia[index].date,
+                                style: GoogleFonts.nunito(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 100,
+                              left: 5,
+                              child: Text(
+                                listeMedia[index].auteur,
+                                style: GoogleFonts.nunito(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 140,
+                              left: 5,
+                              child: Text(
+                                "Description: " + listeMedia[index].description,
+                                style: GoogleFonts.nunito(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            //Positioned(
+                            //top: 5,
+                            // right: -15,
+                            // child: AlerteButton(document: document),
+                            //   ),
+                          ],
                         ),
                       ),
-                      Positioned(
-                        top: 60,
-                        left: 5,
-                        child: Text(
-                          listeMedia[index].date,
-                          style: GoogleFonts.nunito(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 100,
-                        left: 5,
-                        child: Text(
-                          listeMedia[index].auteur,
-                          style: GoogleFonts.nunito(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 140,
-                        left: 5,
-                        child: Text(
-                          "Description: " + listeMedia[index].description,
-                          style: GoogleFonts.nunito(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      //Positioned(
-                      //top: 5,
-                      // right: -15,
-                      // child: AlerteButton(document: document),
+
+                      // Container(
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Text(
+                      //         " Auteur : " + listeMedia[index].auteur,
+                      //         style: GoogleFonts.nunito(
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w600,
+                      //           color: Colors.orange[300],
+                      //         ),
+                      //       ),
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(8.0),
+                      //         child: Text(
+                      //           ' Langue : ' + listeMedia[index].langue,
+                      //           style: GoogleFonts.nunito(
+                      //             fontSize: 14,
+                      //             color: Colors.white,
+                      //             fontWeight: FontWeight.w400,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
                       //   ),
+                      // ),
+                      // Container(
+                      //   margin:
+                      //       EdgeInsets.only(left: 100.0, top: 0, bottom: 0, right: 0),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Row(
+                      //         children: [
+                      //           Text(
+                      //             "Description :" + listeMedia[index].description,
+                      //             style: GoogleFonts.nunito(
+                      //               fontSize: 14,
+                      //               color: Colors.white,
+                      //               fontWeight: FontWeight.w400,
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                      //         const Icon(
+                      //           Icons.place,
+                      //           color: Colors.orange,
+                      //           size: 14.0,
+                      //         ),
+                      //         Text(
+                      //           listeMedia[index].nomMedia,
+                      //           style: GoogleFonts.nunito(
+                      //             fontSize: 14,
+                      //             color: Colors.white,
+                      //             fontWeight: FontWeight.w400,
+                      //           ),
+                      //         ),
+                      //       ]),
+                      //     ],
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
-
-                // Container(
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(
-                //         " Auteur : " + listeMedia[index].auteur,
-                //         style: GoogleFonts.nunito(
-                //           fontSize: 16,
-                //           fontWeight: FontWeight.w600,
-                //           color: Colors.orange[300],
-                //         ),
-                //       ),
-                //       Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Text(
-                //           ' Langue : ' + listeMedia[index].langue,
-                //           style: GoogleFonts.nunito(
-                //             fontSize: 14,
-                //             color: Colors.white,
-                //             fontWeight: FontWeight.w400,
-                //           ),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // Container(
-                //   margin:
-                //       EdgeInsets.only(left: 100.0, top: 0, bottom: 0, right: 0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Row(
-                //         children: [
-                //           Text(
-                //             "Description :" + listeMedia[index].description,
-                //             style: GoogleFonts.nunito(
-                //               fontSize: 14,
-                //               color: Colors.white,
-                //               fontWeight: FontWeight.w400,
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                //         const Icon(
-                //           Icons.place,
-                //           color: Colors.orange,
-                //           size: 14.0,
-                //         ),
-                //         Text(
-                //           listeMedia[index].nomMedia,
-                //           style: GoogleFonts.nunito(
-                //             fontSize: 14,
-                //             color: Colors.white,
-                //             fontWeight: FontWeight.w400,
-                //           ),
-                //         ),
-                //       ]),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
           );
