@@ -39,23 +39,23 @@ class _Page_ManuState extends State<Page_Manu> {
             onPressed: () => Navigator.pop(context),
           ),
           title: Text(
-            'Gestion des Livres',
+            'Gestion des Medias',
             style: GoogleFonts.kanit(
                 color: Colors.orange,
                 fontSize: 22,
                 fontWeight: FontWeight.w800),
           ),
           actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.add_box_outlined,
-                  color: Colors.grey[800],
-                  size: 30,
-                ),
-                onPressed: () {
-                  //Navigator.push(context,
-                  //  MaterialPageRoute(builder: (context) => addLivre()));
-                }),
+            // IconButton(
+            //     icon: Icon(
+            //       Icons.add_box_outlined,
+            //       color: Colors.grey[800],
+            //       size: 30,
+            //     ),
+            //     onPressed: () {
+            //       //Navigator.push(context,
+            //       //  MaterialPageRoute(builder: (context) => addLivre()));
+            //     }),
           ],
           centerTitle: true,
           backgroundColor: Colors.white,
@@ -64,7 +64,7 @@ class _Page_ManuState extends State<Page_Manu> {
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
           child: Column(children: [
             const Text(
-              "Ajouter un media par scan",
+              "Filtrer les médias",
             ),
             // DropdownButton<String>(
             //   value: media,
@@ -106,11 +106,11 @@ class _Page_ManuState extends State<Page_Manu> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        "Scanner",
+                        "Filtrer par médias",
                         style: TextStyle(fontSize: 10, color: Colors.yellow),
                       ),
                       Text(
-                        "(Bêta)",
+                        "(pas encore fonctionnel)",
                         style: TextStyle(fontSize: 10, color: Colors.orange),
                       ),
                     ],
@@ -142,7 +142,25 @@ class _Page_ManuState extends State<Page_Manu> {
             ),
             Expanded(child: MediaSection()),
           ]),
-        ));
+        ),
+        bottomNavigationBar:
+            BottomNavigationBar(items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.red,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.tablet),
+            label: 'Medias',
+            backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'About',
+            backgroundColor: Colors.purple,
+          ),
+        ]));
   }
 }
 
