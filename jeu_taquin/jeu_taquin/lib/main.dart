@@ -33,6 +33,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const Afficher_Exercice());
+        home: Afficher_Exercice());
   }
 }

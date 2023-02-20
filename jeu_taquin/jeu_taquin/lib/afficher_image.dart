@@ -50,7 +50,7 @@ class _Page_afficher_image extends State<afficher_Image> {
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
           child: Column(children: [
             const Text(
-              "Selectionner un niveau?",
+              "Exercice 1",
             ),
             GestureDetector(
               child: Container(
@@ -79,10 +79,6 @@ class _Page_afficher_image extends State<afficher_Image> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Exercice",
-                  ),
-                  //SizedBox(width: 70,),
                   GestureDetector(
                     child: Icon(Icons.view_carousel),
                     onTap: () => Navigator.pushNamed(context, "/actu"),
@@ -105,7 +101,7 @@ class AfficherImage extends StatelessWidget {
         width: 720,
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage(exercice1.image),
+          image: AssetImage('image1.jpg'),
         )));
   }
 }

@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
+import 'transformer_image.dart';
+import 'package:jeu_taquin/afficher_image.dart';
 
 class Exercice {
   //"isbn10";"isbn13";"titre";"auteur";"editeur";"date";"langue";"description"
-  Exercice(String image, String nomExercice) {
-    if (image == "") {
-      this.image = "Inconnu";
+  Exercice(String titre, String sousTitre, WidgetBuilder buildFunction) {
+    if (titre == "") {
+      this.titre = "Inconnu";
     } else {
-      this.image = image;
+      this.titre = titre;
     }
-    if (nomExercice == "") {
-      this.nomExercice = "Inconnu";
+    if (sousTitre == "") {
+      this.sousTitre = "Inconnu";
     } else {
-      this.nomExercice = nomExercice;
+      this.sousTitre = sousTitre;
     }
+    this.buildFunc = buildFunction;
   }
-  late String image;
-  late String nomExercice;
+  late String titre;
+  late String sousTitre;
+  late WidgetBuilder buildFunc;
 }
 
-Exercice exercice1 = Exercice('image1.jpg', "Exercice 1");
-Exercice exercice2 = Exercice('image2.jpg', "Exercice 2");
-Exercice exercice3 = Exercice('image3.jpg', "Exercice 3");
-Exercice exercice4 = Exercice('image4.jpg', "Exercice 4");
+// buildFonction: (context => exo2.DisplaytitreWidget);
+Exercice exercice1 =
+    Exercice("Exercice 1", "Display an image", (context) => afficher_Image());
+Exercice exercice2 = Exercice(
+    "Exercice 2", "Rotate/Resize Image", (context) => transformerimage());
+// Exercice exercice3 = Exercice('image3.jpg', "Exercice 3");
+// Exercice exercice4 = Exercice('image4.jpg', "Exercice 4");
 
-List<Exercice> ListeExercices = [exercice1, exercice2, exercice3, exercice4];
+List<Exercice> ListeExercices = [exercice1, exercice2];
