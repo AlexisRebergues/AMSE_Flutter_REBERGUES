@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'afficher_image.dart';
@@ -19,28 +20,30 @@ class Transformationimage extends State<transformerimage> {
   double scale = 0.0;
   double mirroirrotation = 0;
   bool animation = false;
+  int machin = 100;
 
-  void duree() {
-    const d = const Duration(milliseconds: 50);
-    new Timer.periodic(d, animate);
-  }
   // this new Timer automatically calls animate every 50ms
 
   void animate(Timer t) {
-    if (rotateX == 100) {
-      rotateX = 0;
-    }
-    if (rotateZ == 100) {
-      rotateZ = 0;
-    }
-    if (scale == 100) {
-      scale = 0;
-    }
-    rotateX = rotateX + 1;
-    rotateZ = rotateZ + 1;
-    scale = scale + 1;
-
-    t.cancel(); // stops the timer
+    setState(() {
+      machin--;
+      if (rotateX == 100) {
+        rotateX = 0;
+      }
+      if (rotateZ == 100) {
+        rotateZ = 0;
+      }
+      if (scale == 100) {
+        scale = 0;
+      }
+      rotateX = rotateX + 1;
+      rotateZ = rotateZ + 1;
+      scale = scale + 1;
+      if (machin == 0) {
+        machin = 100;
+        t.cancel();
+      } // stops the timer
+    });
   }
 
   @override
@@ -147,7 +150,13 @@ class Transformationimage extends State<transformerimage> {
           ],
         ),
         IconButton(
-            onPressed: () => duree(), icon: Icon(Icons.play_arrow_rounded))
+            onPressed: () {
+              setState(() {
+                const d = const Duration(milliseconds: 50);
+                new Timer.periodic(d, animate);
+              });
+            },
+            icon: Icon(Icons.play_arrow_rounded))
       ]),
     );
   }
