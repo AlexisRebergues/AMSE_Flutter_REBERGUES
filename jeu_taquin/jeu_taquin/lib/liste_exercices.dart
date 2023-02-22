@@ -2,6 +2,7 @@ import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:jeu_taquin/taquin_board.dart';
+import 'package:jeu_taquin/taquin_board_modifications.dart';
 import 'transformer_image.dart';
 import 'package:jeu_taquin/afficher_image.dart';
 import 'as_cropped_image.dart';
@@ -42,10 +43,14 @@ Exercice exercice5a = Exercice(
 Exercice exercice5b =
     Exercice("Exercice 5b", "TaquinBoard", ((context) => TaquinBoard()));
 
+Exercice exercice5c = Exercice("Exercice 5c", "TaquinBoardModifications",
+    ((context) => TaquinBoardModifications()));
+
 List<Exercice> ListeExercices = [
   exercice1,
   exercice2,
   exercice3,
   exercice5a,
-  exercice5b
+  exercice5b,
+  exercice5c,
 ];
