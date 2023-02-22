@@ -1,9 +1,11 @@
 import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:jeu_taquin/taquin_board.dart';
 import 'transformer_image.dart';
 import 'package:jeu_taquin/afficher_image.dart';
 import 'as_cropped_image.dart';
+import 'gridview_example.dart';
 
 class Exercice {
   //"isbn10";"isbn13";"titre";"auteur";"editeur";"date";"langue";"description"
@@ -34,5 +36,16 @@ Exercice exercice2 = Exercice(
 Exercice exercice3 = Exercice("Exercice 4", "Display a tile as a cropped image",
     ((context) => as_croped_image()));
 // Exercice exercice4 = Exercice('image4.jpg', "Exercice 4");
+Exercice exercice5a = Exercice(
+    "Exercice 5a", "GridView Examples", ((context) => gridViewExamples()));
 
-List<Exercice> ListeExercices = [exercice1, exercice2, exercice3];
+Exercice exercice5b =
+    Exercice("Exercice 5b", "TaquinBoard", ((context) => TaquinBoard()));
+
+List<Exercice> ListeExercices = [
+  exercice1,
+  exercice2,
+  exercice3,
+  exercice5a,
+  exercice5b
+];
