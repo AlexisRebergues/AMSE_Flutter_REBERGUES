@@ -1,6 +1,7 @@
 import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:jeu_taquin/moving_tiles.dart';
 import 'package:jeu_taquin/taquin_board.dart';
 import 'package:jeu_taquin/taquin_board_modifications.dart';
 import 'transformer_image.dart';
@@ -46,6 +47,9 @@ Exercice exercice5b =
 Exercice exercice5c = Exercice("Exercice 5c", "TaquinBoardModifications",
     ((context) => TaquinBoardModifications()));
 
+Exercice exercice6a =
+    Exercice("Exercice 6a", "Moving Tiles", ((context) => PositionedTiles()));
+
 List<Exercice> ListeExercices = [
   exercice1,
   exercice2,
@@ -53,4 +57,5 @@ List<Exercice> ListeExercices = [
   exercice5a,
   exercice5b,
   exercice5c,
+  exercice6a,
 ];
