@@ -12,19 +12,35 @@ class Tile {
   Tile({this.imageURL, this.alignment});
 
   Widget croppedImageTile(int nbPiece) {
-    return FittedBox(
-      fit: BoxFit.fill,
-      child: ClipRect(
-        child: Container(
-          child: Align(
-            alignment: alignment!,
-            widthFactor: 0.3,
-            heightFactor: 0.3,
-            child: this.imageURL!,
+    if (nbPiece == 3) {
+      return FittedBox(
+        fit: BoxFit.fill,
+        child: ClipRect(
+          child: Container(
+            child: Align(
+              alignment: alignment!,
+              widthFactor: 0.3,
+              heightFactor: 0.3,
+              child: this.imageURL!,
+            ),
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return FittedBox(
+        fit: BoxFit.fill,
+        child: ClipRect(
+          child: Container(
+            child: Align(
+              alignment: alignment!,
+              widthFactor: 1 / nbPiece,
+              heightFactor: 1 / nbPiece,
+              child: this.imageURL!,
+            ),
+          ),
+        ),
+      );
+    }
   }
 }
 
@@ -73,7 +89,8 @@ class TaquinBoardModifications extends StatefulWidget {
 
 class TaquinBoardModificationsState extends State<TaquinBoardModifications> {
   List<Tile> creertoutetile(int nbPiece) {
-    double machin = nbPiece / 3;
+    double machin = nbPiececote / 3;
+
     List<Tile> listTile = [];
     for (int i = 0; i < nbPiece; i++) {
       for (int j = 0; j < nbPiece; j++) {
@@ -144,7 +161,7 @@ class TaquinBoardModificationsState extends State<TaquinBoardModifications> {
               padding: const EdgeInsets.all(4),
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
-              crossAxisCount: 3,
+              crossAxisCount: nbPiececote,
               children: creerlistwidget,
             ),
           ),
@@ -157,6 +174,9 @@ class TaquinBoardModificationsState extends State<TaquinBoardModifications> {
               onChanged: (double value) {
                 setState(() {
                   nbPiececote = value.toInt();
+                  creerensembletile = creertoutetile(nbPiececote);
+                  creerlistwidget = creerlistewidgetcorrespondant(
+                      creerensembletile, nbPiececote);
                 });
               })
         ]));
