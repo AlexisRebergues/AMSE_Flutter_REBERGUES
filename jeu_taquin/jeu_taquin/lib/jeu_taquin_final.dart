@@ -118,14 +118,18 @@ class FinalJeuTaquin extends StatefulWidget {
 }
 
 class FinalJeuTaquinState extends State<FinalJeuTaquin> {
-  int nbEchangeauto = 3;
+  int nbEchangeauto = 7;
   int nbPieceCote = 3;
   int numeroEmpty = 1;
+  bool dejamelange = false;
   List<Tile> tiles = [];
   @override
   Widget build(BuildContext context) {
     MiseajourListeTiles();
-    Melangeauto();
+    if (!dejamelange) {
+      Melangeauto();
+      dejamelange = true;
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text("Moving Tile Gridview"),
@@ -220,7 +224,6 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
     // tiles = [];
     int nbEchange = nbEchangeauto;
     while (nbEchange != 0) {
-      MiseajourListeTiles();
       int nextTile = math.Random().nextInt(nbPieceCote * nbPieceCote);
       if (Echangeable(nextTile)) {
         EchangerTileEmpty(nextTile);
