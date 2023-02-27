@@ -121,6 +121,7 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
   int nbEchangeauto = 7;
   int nbPieceCote = 3;
   int numeroEmpty = 1;
+  int NbCoup = 0;
   bool dejamelange = false;
   List<Tile> tiles = [];
   @override
@@ -143,6 +144,11 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
                   }
                 })),
         body: Column(children: [
+          Container(
+            height: 90,
+            width: 100,
+            child: Text("Coups: " + NbCoup.toString()),
+          ),
           Center(
               child: Container(
                   height: 550,
@@ -159,6 +165,10 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
                           ),
                           onTap: () {
                             setState(() {
+                              if (Echangeable(index)) {
+                                NbCoup += 1;
+                              }
+
                               EchangerTileEmpty(index);
                             });
                           },
@@ -180,6 +190,8 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
               })
         ]));
   }
+
+  //Widget creerBarredescore() {}
 
   bool Echangeable(int i) {
     if (i == numeroEmpty + 1 && i % nbPieceCote != 0) {
