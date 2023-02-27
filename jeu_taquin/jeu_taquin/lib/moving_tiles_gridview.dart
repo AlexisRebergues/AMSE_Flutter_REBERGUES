@@ -60,8 +60,8 @@ class PositionedTilesGridview extends StatefulWidget {
 }
 
 class PositionedTilesGridviewState extends State<PositionedTilesGridview> {
-  int nbPieceCote = 4;
-  int numeroEmpty = 4;
+  int nbPieceCote = 3;
+  int numeroEmpty = 1;
   List<Tile> tiles = [];
   @override
   Widget build(BuildContext context) {
@@ -70,26 +70,42 @@ class PositionedTilesGridviewState extends State<PositionedTilesGridview> {
         appBar: AppBar(
           title: Text("Moving Tile Gridview"),
         ),
-        body: Center(
-            child: Container(
-                padding: const EdgeInsets.all(10),
-                child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: nbPieceCote),
-                    itemCount: tiles.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        child: Container(
-                          padding: const EdgeInsets.all(1),
-                          child: TileWidget(tile: tiles[index]),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            EchangerTileEmpty(index);
-                          });
-                        },
-                      );
-                    }))));
+        body: Column(children: [
+          Center(
+              child: Container(
+                  height: 550,
+                  width: 720,
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: nbPieceCote),
+                      itemCount: tiles.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          child: Container(
+                            padding: const EdgeInsets.all(1),
+                            child: TileWidget(tile: tiles[index]),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              EchangerTileEmpty(index);
+                            });
+                          },
+                        );
+                      }))),
+          Slider(
+              value: nbPieceCote + 0.0,
+              min: 3,
+              max: 5,
+              divisions: 2,
+              label: nbPieceCote.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  nbPieceCote = value.toInt();
+                  tiles = [];
+                  MiseajourListeTiles();
+                });
+              })
+        ]));
   }
 
   void MiseajourListeTiles() {
