@@ -118,12 +118,14 @@ class FinalJeuTaquin extends StatefulWidget {
 }
 
 class FinalJeuTaquinState extends State<FinalJeuTaquin> {
+  int nbEchangeauto = 3;
   int nbPieceCote = 3;
   int numeroEmpty = 1;
   List<Tile> tiles = [];
   @override
   Widget build(BuildContext context) {
     MiseajourListeTiles();
+    Melangeauto();
     return Scaffold(
         appBar: AppBar(
           title: Text("Moving Tile Gridview"),
@@ -161,6 +163,7 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
                   nbPieceCote = value.toInt();
                   tiles = [];
                   MiseajourListeTiles();
+                  Melangeauto();
                 });
               })
         ]));
@@ -190,7 +193,6 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
               Alignment(-1 + 2 * j / (nbPieceCote - 1),
                   -1 + 2 * i / (nbPieceCote - 1)),
               nbPieceCote));
-          ;
         }
       }
     }
@@ -212,5 +214,20 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
       tiles[i] = oldEmpty;
       numeroEmpty = i;
     }
+  }
+
+  void Melangeauto() {
+    // tiles = [];
+    int nbEchange = nbEchangeauto;
+    while (nbEchange != 0) {
+      MiseajourListeTiles();
+      int nextTile = math.Random().nextInt(nbPieceCote * nbPieceCote);
+      if (Echangeable(nextTile)) {
+        EchangerTileEmpty(nextTile);
+        numeroEmpty = nextTile;
+        nbEchange--;
+      }
+    }
+    MiseajourListeTiles();
   }
 }
