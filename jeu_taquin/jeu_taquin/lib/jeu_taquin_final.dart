@@ -126,14 +126,22 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
   @override
   Widget build(BuildContext context) {
     MiseajourListeTiles();
-    if (!dejamelange) {
-      Melangeauto();
-      dejamelange = true;
-    }
+    // if (!dejamelange) {
+    //   Melangeauto();
+    //   dejamelange = true;
+    // }
     return Scaffold(
         appBar: AppBar(
           title: Text("Moving Tile Gridview"),
         ),
+        floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.play_circle),
+            onPressed: () => setState(() {
+                  if (!dejamelange) {
+                    Melangeauto();
+                    dejamelange = true;
+                  }
+                })),
         body: Column(children: [
           Center(
               child: Container(
@@ -167,7 +175,7 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
                   nbPieceCote = value.toInt();
                   tiles = [];
                   MiseajourListeTiles();
-                  Melangeauto();
+                  dejamelange = false;
                 });
               })
         ]));
