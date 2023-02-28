@@ -110,7 +110,7 @@ Widget tileNonEmptyVoisin(Tile tile) {
           child: fittedBox));
 }
 
-String imagechoisi = 'image4.jpg';
+String imagechoisi = 'image4.jpg'; //CHOIX DE L'IMAGE EN GLOBAL
 
 class PageChoixNiveau extends StatefulWidget {
   @override
@@ -182,7 +182,7 @@ class FinalJeuTaquin extends StatefulWidget {
 }
 
 class FinalJeuTaquinState extends State<FinalJeuTaquin> {
-  int nbEchangeauto = 7;
+  int nbEchangeauto = 3;
   int nbPieceCote = 3;
   int numeroEmpty = 1;
   int NbCoup = 0;
@@ -234,6 +234,9 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
                               }
 
                               EchangerTileEmpty(index);
+                              if (niveauFini()) {
+                                print("niveau fini");
+                              }
                             });
                           },
                         );
@@ -295,6 +298,32 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
     }
   }
 
+  List<Tile> CreationdebaseListeTiles() {
+    List<Tile> listdebase = [];
+    if (listdebase.isEmpty) {
+      for (int i = 0; i < nbPieceCote; i++) {
+        for (int j = 0; j < nbPieceCote; j++) {
+          listdebase.add(Tile(
+              0,
+              imagechoisi,
+              Alignment(-1 + 2 * j / (nbPieceCote - 1),
+                  -1 + 2 * i / (nbPieceCote - 1)),
+              nbPieceCote));
+        }
+      }
+    }
+    for (int i = 0; i < nbPieceCote * nbPieceCote; i++) {
+      if (i == numeroEmpty) {
+        listdebase[i].type = 2;
+      } else if (Echangeable(i)) {
+        listdebase[i].type = 1;
+      } else {
+        listdebase[i].type = 0;
+      }
+    }
+    return listdebase;
+  }
+
   void EchangerTileEmpty(int i) {
     if (tiles[i].type == 1) {
       Tile oldEmpty = tiles[numeroEmpty];
@@ -316,5 +345,20 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
       }
     }
     MiseajourListeTiles();
+  }
+
+  bool niveauFini() {
+    int numeroPiece = 0;
+    for (int i = 0; i < nbPieceCote; i++) {
+      for (int j = 0; j < nbPieceCote; j++) {
+        if (tiles[numeroPiece].alignment !=
+            Alignment(-1 + 2 * j / (nbPieceCote - 1),
+                -1 + 2 * i / (nbPieceCote - 1))) {
+          return false;
+        }
+        numeroPiece++;
+      }
+    }
+    return true;
   }
 }
