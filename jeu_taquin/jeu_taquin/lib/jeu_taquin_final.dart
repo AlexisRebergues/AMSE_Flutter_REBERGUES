@@ -110,6 +110,70 @@ Widget tileNonEmptyVoisin(Tile tile) {
           child: fittedBox));
 }
 
+String imagechoisi = 'image4.jpg';
+
+class PageChoixNiveau extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => PageChoixNiveauState();
+}
+
+class PageChoixNiveauState extends State<PageChoixNiveau> {
+  List<String> CreerlisteImage() {
+    List<String> listimage = [];
+    for (int i = 1; i < 5; i++) {
+      listimage.add((('image' + i.toString() + '.jpg')));
+    }
+    return listimage;
+  }
+
+  late List<String> listImage = CreerlisteImage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        bottomNavigationBar:
+            BottomNavigationBar(items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.red,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.tablet),
+            label: 'Jeu',
+            backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'About',
+            backgroundColor: Colors.purple,
+          ),
+        ]),
+        appBar: AppBar(
+          title: Text('TP2'),
+        ),
+        body: ListView.builder(
+            itemCount: listImage.length,
+            itemBuilder: (context, index) {
+              var exo = listImage[index];
+              return Card(
+                  child: ListTile(
+                      leading: Image.asset(listImage[index]),
+                      title: Text("Niveau " + (index + 1).toString()),
+                      subtitle: Text("rien pour l'instant"),
+                      trailing: Icon(Icons.play_arrow_rounded),
+                      onTap: () {
+                        imagechoisi = listImage[index];
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => FinalJeuTaquin())),
+                        );
+                      }));
+            }));
+  }
+}
+
 void main() => runApp(new MaterialApp(home: FinalJeuTaquin()));
 
 class FinalJeuTaquin extends StatefulWidget {
@@ -213,7 +277,7 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
         for (int j = 0; j < nbPieceCote; j++) {
           tiles.add(Tile(
               0,
-              'image4.jpg',
+              imagechoisi,
               Alignment(-1 + 2 * j / (nbPieceCote - 1),
                   -1 + 2 * i / (nbPieceCote - 1)),
               nbPieceCote));

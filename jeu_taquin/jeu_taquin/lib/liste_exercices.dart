@@ -55,8 +55,8 @@ Exercice exercice6a =
 Exercice exercice6b = Exercice("Exercice 6b", "Moving Tiles Gridview",
     ((context) => PositionedTilesGridview()));
 
-Exercice exercice7 =
-    Exercice("Exercice 7", "Jeu Taquin final", ((context) => FinalJeuTaquin()));
+Exercice exercice7 = Exercice(
+    "Exercice 7", "Jeu Taquin final", ((context) => PageChoixNiveau()));
 
 List<Exercice> ListeExercices = [
   exercice1,
