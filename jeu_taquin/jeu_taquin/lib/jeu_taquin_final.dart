@@ -33,8 +33,8 @@ class TileWidget extends StatelessWidget {
   Widget tileNonEmptyNonVoisin(Tile tile) {
     Image image = Image.asset(
       tile.imageURL!,
-      height: 500,
-      width: 500,
+      height: 490,
+      width: 490,
     );
 
     if (tile.nbPiececote == 3) {
@@ -115,7 +115,7 @@ Widget tileNonEmptyVoisin(Tile tile) {
 }
 
 String imagechoisi = 'image4.jpg'; //CHOIX DE L'IMAGE EN GLOBAL
-int nbEchangeauto = 0;
+int nbEchangeauto = 0; //NOMBRE DE MELANGE DEPEND DE L'IMAGE
 
 class PageChoixNiveau extends StatefulWidget {
   @override
@@ -189,6 +189,7 @@ class FinalJeuTaquin extends StatefulWidget {
 }
 
 class FinalJeuTaquinState extends State<FinalJeuTaquin> {
+  int oldPositionEmpty = 0;
   int nbPieceCote = 3;
   int numeroEmpty = 1;
   int NbCoup = 0;
@@ -219,10 +220,18 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
             width: 100,
             child: Text("Coups: " + NbCoup.toString()),
           ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                annulerlederniercoup();
+              });
+            },
+            child: Text("Annuler"),
+          ),
           Center(
               child: Container(
-                  height: 500,
-                  width: 500,
+                  height: 490,
+                  width: 490,
                   child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: nbPieceCote),
@@ -284,6 +293,15 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
     return false;
   }
 
+  void annulerlederniercoup() {
+    Tile oldEmpty = tiles[numeroEmpty];
+    tiles[numeroEmpty] = tiles[oldPositionEmpty];
+    tiles[oldPositionEmpty] = oldEmpty;
+    numeroEmpty = oldPositionEmpty;
+    oldPositionEmpty = 0;
+    MiseajourListeTiles();
+  }
+
   void MiseajourListeTiles() {
     if (tiles.isEmpty) {
       for (int i = 0; i < nbPieceCote; i++) {
@@ -339,6 +357,7 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
       Tile oldEmpty = tiles[numeroEmpty];
       tiles[numeroEmpty] = tiles[i];
       tiles[i] = oldEmpty;
+      oldPositionEmpty = numeroEmpty;
       numeroEmpty = i;
     }
   }
@@ -374,8 +393,9 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
     int nbEchange = nbEchangeauto;
     while (nbEchange != 0) {
       int nextTile = math.Random().nextInt(nbPieceCote * nbPieceCote);
-      if (Echangeable(nextTile)) {
+      if (Echangeable(nextTile) && nextTile != oldPositionEmpty) {
         EchangerTileEmpty(nextTile);
+        oldPositionEmpty = numeroEmpty;
         numeroEmpty = nextTile;
         nbEchange--;
       }
