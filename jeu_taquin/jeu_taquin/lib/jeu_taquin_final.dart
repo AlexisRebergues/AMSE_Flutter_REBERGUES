@@ -31,7 +31,11 @@ class TileWidget extends StatelessWidget {
   }
 
   Widget tileNonEmptyNonVoisin(Tile tile) {
-    Image image = Image.asset(tile.imageURL!);
+    Image image = Image.asset(
+      tile.imageURL!,
+      height: 500,
+      width: 500,
+    );
 
     if (tile.nbPiececote == 3) {
       return (FittedBox(
@@ -111,6 +115,7 @@ Widget tileNonEmptyVoisin(Tile tile) {
 }
 
 String imagechoisi = 'image4.jpg'; //CHOIX DE L'IMAGE EN GLOBAL
+int nbEchangeauto = 0;
 
 class PageChoixNiveau extends StatefulWidget {
   @override
@@ -120,7 +125,7 @@ class PageChoixNiveau extends StatefulWidget {
 class PageChoixNiveauState extends State<PageChoixNiveau> {
   List<String> CreerlisteImage() {
     List<String> listimage = [];
-    for (int i = 1; i < 5; i++) {
+    for (int i = 1; i < 11; i++) {
       listimage.add((('image' + i.toString() + '.jpg')));
     }
     return listimage;
@@ -160,10 +165,12 @@ class PageChoixNiveauState extends State<PageChoixNiveau> {
                   child: ListTile(
                       leading: Image.asset(listImage[index]),
                       title: Text("Niveau " + (index + 1).toString()),
-                      subtitle: Text("rien pour l'instant"),
+                      subtitle: Text(
+                          "Réalisable en " + (index + 1).toString() + " coups"),
                       trailing: Icon(Icons.play_arrow_rounded),
                       onTap: () {
                         imagechoisi = listImage[index];
+                        nbEchangeauto = index + 1;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -182,7 +189,6 @@ class FinalJeuTaquin extends StatefulWidget {
 }
 
 class FinalJeuTaquinState extends State<FinalJeuTaquin> {
-  int nbEchangeauto = 3;
   int nbPieceCote = 3;
   int numeroEmpty = 1;
   int NbCoup = 0;
@@ -215,8 +221,8 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
           ),
           Center(
               child: Container(
-                  height: 550,
-                  width: 720,
+                  height: 500,
+                  width: 500,
                   child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: nbPieceCote),
@@ -235,7 +241,11 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
 
                               EchangerTileEmpty(index);
                               if (niveauFini()) {
-                                print("niveau fini");
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      FenetreDeGagne(context),
+                                );
                               }
                             });
                           },
@@ -244,8 +254,8 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
           Slider(
               value: nbPieceCote + 0.0,
               min: 3,
-              max: 5,
-              divisions: 2,
+              max: 10,
+              divisions: 7,
               label: nbPieceCote.round().toString(),
               onChanged: (double value) {
                 setState(() {
@@ -331,6 +341,32 @@ class FinalJeuTaquinState extends State<FinalJeuTaquin> {
       tiles[i] = oldEmpty;
       numeroEmpty = i;
     }
+  }
+
+  Widget FenetreDeGagne(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('Partie Gagnée'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("Félicitations, vous avez réussi le niveau " +
+              nbEchangeauto.toString() +
+              " en " +
+              NbCoup.toString() +
+              " coups"),
+        ],
+      ),
+      actions: <Widget>[
+        new TextButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => PageChoixNiveau())));
+          },
+          child: const Text('Retour au menu'),
+        ),
+      ],
+    );
   }
 
   void Melangeauto() {
